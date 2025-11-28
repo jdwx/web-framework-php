@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework;
+namespace JDWX\Web\Framework\Tests;
 
 
 use JDWX\Web\Framework\AbstractRoute;

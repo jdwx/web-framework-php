@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework;
+namespace JDWX\Web\Framework\Tests;
 
 
 use JDWX\Web\Backends\MockHttpBackend;
@@ -13,20 +13,18 @@ use JDWX\Web\Framework\MapRouteManager;
 use JDWX\Web\Framework\Response;
 use JDWX\Web\Framework\RouteMatch;
 use JDWX\Web\Framework\RouteRouter;
+use JDWX\Web\Framework\Tests\Shims\MyRoute;
+use JDWX\Web\Framework\Tests\Shims\MyRouteManager;
+use JDWX\Web\Framework\Tests\Shims\MyRouteRouter;
 use JDWX\Web\Http;
 use JDWX\Web\Request;
 use JDWX\Web\RequestInterface;
-use JDWX\Web\Tests\Shims\MyRoute;
-use JDWX\Web\Tests\Shims\MyRouteManager;
-use JDWX\Web\Tests\Shims\MyRouteRouter;
 use LogicException;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
 
-require_once __DIR__ . '/../Shims/MyRoute.php';
-require_once __DIR__ . '/../Shims/MyRouteManager.php';
-require_once __DIR__ . '/../Shims/MyRouteRouter.php';
+require_once __DIR__ . '/Shims/MyRouteRouter.php';
 
 
 #[CoversClass( RouteRouter::class )]
@@ -125,7 +123,7 @@ final class RouteRouterTest extends TestCase {
         $http = new MockHttpBackend();
         Http::init( $http );
 
-        $router->addStaticRoute( '/foo', __DIR__ . '/../../example/static/example.txt' );
+        $router->addStaticRoute( '/foo', __DIR__ . '/../example/static/example.txt' );
         ob_start();
         $x = $router->route();
 

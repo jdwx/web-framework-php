@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework;
+namespace JDWX\Web\Framework\Tests;
 
 
 use JDWX\Strict\OK;
@@ -14,15 +14,12 @@ use JDWX\Web\Tests\Shims\MyTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 
 
-require_once __DIR__ . '/../Shims/MyTestCase.php';
-
-
 #[CoversClass( HttpError::class )]
 final class HttpErrorTest extends MyTestCase {
 
 
     public function testCustomError() : void {
-        $error = new HttpError( __DIR__ . '/../../example/errors/error%d.php' );
+        $error = new HttpError( __DIR__ . '/../example/errors/error%d.php' );
         $st = $error->render( 404 );
         self::assertStringContainsString( 'This is an example 404 error page.', $st );
     }

@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Shims;
+namespace JDWX\Web\Framework\Tests\Shims;
 
 
 use JDWX\Web\Framework\RouteRouter;

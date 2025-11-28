@@ -4,12 +4,12 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework;
+namespace JDWX\Web\Framework\Tests;
 
 
 use JDWX\Web\Framework\RouteMatch;
-use JDWX\Web\Tests\Shims\MyRoute;
-use JDWX\Web\Tests\Shims\MyRouter;
+use JDWX\Web\Framework\Tests\Shims\MyRoute;
+use JDWX\Web\Framework\Tests\Shims\MyRouter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 

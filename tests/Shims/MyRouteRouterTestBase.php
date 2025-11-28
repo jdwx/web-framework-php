@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Shims;
+namespace JDWX\Web\Framework\Tests\Shims;
 
 
 use InvalidArgumentException;
@@ -23,7 +23,7 @@ abstract class MyRouteRouterTestBase extends TestCase {
 
     public function testAddRouteForInvalidRoute() : void {
         $router = $this->newRouter();
-        self::expectException( InvalidArgumentException::class );
+        $this->expectException( InvalidArgumentException::class );
         $router->addRoutePub( '/test', 'invalid' );
     }
 
@@ -32,14 +32,14 @@ abstract class MyRouteRouterTestBase extends TestCase {
         $router = $this->newRouter();
         $route = new MyRoute( $router );
         $router->addRoutePub( '/test', $route );
-        self::expectException( InvalidArgumentException::class );
+        $this->expectException( InvalidArgumentException::class );
         $router->addRoutePub( '/test', $route );
     }
 
 
     public function testAddRouteForWrongClass() : void {
         $router = $this->newRouter();
-        self::expectException( InvalidArgumentException::class );
+        $this->expectException( InvalidArgumentException::class );
         $router->addRoutePub( '/test', self::class );
     }
 
@@ -168,7 +168,7 @@ abstract class MyRouteRouterTestBase extends TestCase {
         $req = $this->newRequest( 'GET', '/test' );
         $router = $this->newRouter( i_req: $req );
         $router->addRoutePub( '/test', MyRoute::class );
-        self::expectException( MethodNotAllowedException::class );
+        $this->expectException( MethodNotAllowedException::class );
         $router->route();
     }
 

@@ -4,15 +4,15 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework;
+namespace JDWX\Web\Framework\Tests;
 
 
 use JDWX\Strict\OK;
 use JDWX\Web\Backends\MockServer;
 use JDWX\Web\Framework\PhpWsShim;
+use JDWX\Web\Framework\Tests\Shims\MyAbstractRouter;
 use JDWX\Web\Request;
 use JDWX\Web\RequestInterface;
-use JDWX\Web\Tests\Shims\MyAbstractRouter;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 
@@ -52,7 +52,7 @@ final class PhpWsShimTest extends TestCase {
     public function testRunForRouter() : void {
         $req = $this->newRequest();
         $router = new MyAbstractRouter( i_req: $req );
-        $router->fnRoute = function () {
+        $router->fnRoute = static function () {
             echo 'Hello, world!';
         };
         $shim = new PhpWsShim( $router );
@@ -78,7 +78,7 @@ final class PhpWsShimTest extends TestCase {
     private function newRequest( string $i_stUri = '/' ) : RequestInterface {
         $srv = new MockServer();
         $srv = $srv->withRequestUri( $i_stUri );
-        $srv = $srv->withDocumentRoot( __DIR__ . '/../../example/static' );
+        $srv = $srv->withDocumentRoot( __DIR__ . '/../example/static' );
         return Request::synthetic( [], [], [], [], $srv );
     }
 

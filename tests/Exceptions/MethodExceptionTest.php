@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework\Exceptions;
+namespace JDWX\Web\Framework\Tests\Exceptions;
 
 
 use JDWX\Web\Framework\Exceptions\MethodException;

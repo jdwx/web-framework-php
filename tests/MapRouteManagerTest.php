@@ -4,12 +4,12 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework;
+namespace JDWX\Web\Framework\Tests;
 
 
 use InvalidArgumentException;
 use JDWX\Web\Framework\MapRouteManager;
-use JDWX\Web\Tests\Shims\MyRoute;
+use JDWX\Web\Framework\Tests\Shims\MyRoute;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 

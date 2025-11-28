@@ -4,7 +4,7 @@
 declare( strict_types = 1 );
 
 
-namespace JDWX\Web\Tests\Framework;
+namespace JDWX\Web\Framework\Tests;
 
 
 use JDWX\Log\BufferLogger;
@@ -16,10 +16,10 @@ use JDWX\Web\Framework\Exceptions\InternalServerException;
 use JDWX\Web\Framework\Exceptions\MethodNotAllowedException;
 use JDWX\Web\Framework\HttpError;
 use JDWX\Web\Framework\Response;
+use JDWX\Web\Framework\Tests\Shims\MyAbstractRouter;
 use JDWX\Web\Http;
 use JDWX\Web\Pages\SimpleTextPage;
 use JDWX\Web\Request;
-use JDWX\Web\Tests\Shims\MyAbstractRouter;
 use JDWX\Web\Tests\Shims\MyTestCase;
 use PHPUnit\Framework\Attributes\CoversClass;
 use Psr\Log\LoggerInterface;
@@ -78,7 +78,7 @@ final class AbstractRouterTest extends MyTestCase {
         $req = $this->newRequest( 'GET', '/foo/bar' );
         $router = new MyAbstractRouter( i_req: $req );
         $router->assertGET();
-        self::expectException( MethodNotAllowedException::class );
+        $this->expectException( MethodNotAllowedException::class );
         $router->assertPOST();
     }
 
@@ -87,7 +87,7 @@ final class AbstractRouterTest extends MyTestCase {
         $req = $this->newRequest( 'POST', '/foo/bar' );
         $router = new MyAbstractRouter( i_req: $req );
         $router->assertPOST();
-        self::expectException( MethodNotAllowedException::class );
+        $this->expectException( MethodNotAllowedException::class );
         $router->assertGET();
     }
 
@@ -230,7 +230,7 @@ final class AbstractRouterTest extends MyTestCase {
         $req = $this->newRequest();
         $logger = new BufferLogger();
         $router = new MyAbstractRouter( $logger, i_req: $req );
-        $router->fnRoute = function () {
+        $router->fnRoute = static function () {
             throw new InternalServerException( 'TEST_EXCEPTION' );
         };
         OK::ob_start();
@@ -273,7 +273,7 @@ final class AbstractRouterTest extends MyTestCase {
     public function testRunForSuccess() : void {
         $req = $this->newRequest( 'GET', '/foo/bar' );
         $router = new MyAbstractRouter( i_req: $req );
-        $router->fnRoute = function () {
+        $router->fnRoute = static function () {
             echo 'foo';
         };
         OK::ob_start();
