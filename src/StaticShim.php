@@ -45,6 +45,8 @@ class StaticShim {
 
     protected RequestInterface $request;
 
+    protected ?string $nstIndexFile = null;
+
 
     public function __construct( ?string           $i_nstDocumentRoot = null, ?HttpError $i_error = null,
                                  ?RequestInterface $i_req = null ) {
@@ -117,6 +119,10 @@ class StaticShim {
             return false;
         }
 
+        if ( is_string( $this->nstIndexFile ) && str_ends_with( $stURI, '/' ) ) {
+            $stURI .= $this->nstIndexFile;
+        }
+
         if ( $this->rExcludePaths ) {
             foreach ( $this->rExcludePaths as $path ) {
                 if ( str_starts_with( $stURI, $path ) ) {
@@ -152,6 +158,11 @@ class StaticShim {
             return true;
         }
         return false;
+    }
+
+
+    public function setIndexFile( ?string $i_nstIndexFile ) : void {
+        $this->nstIndexFile = $i_nstIndexFile;
     }
 
 

@@ -232,6 +232,22 @@ final class StaticShimTest extends MyTestCase {
     }
 
 
+    public function testSetIndexFile() : void {
+        $req = $this->newRequest( '/' );
+        $shim = new StaticShim( __DIR__ . '/../example/static/', i_req: $req );
+        OK::ob_start();
+        $bResult = $shim->run();
+        OK::ob_get_clean();
+        self::assertFalse( $bResult );
+        $shim->setIndexFile( 'example.txt' );
+        OK::ob_start();
+        $bResult = $shim->run();
+        $st = OK::ob_get_clean();
+        self::assertTrue( $bResult );
+        self::assertStringContainsString( 'This is a test.', $st );
+    }
+
+
     private function newRequest( string $i_stUri, ?string $i_nstDocumentRoot = null ) : Request {
         $srv = new MockServer();
         $srv = $srv->withRequestUri( $i_stUri );
